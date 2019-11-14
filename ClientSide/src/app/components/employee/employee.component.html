@@ -1,0 +1,21 @@
+<div class="row float-right pb-4">
+  <button class="btn btn-link">+Add Employee</button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th style="width: 15%;"></th>
+    </tr>
+  </thead>
+  <tr *ngFor="let employee of employees">
+    <td>{{ employee.e_id }}</td>
+    <td>{{ employee.name }}</td>
+    <td>
+      <i class="fa fa-trash m-2" style="cursor: pointer;"></i>
+      <i class="fa fa-edit" style="cursor: pointer;"></i>
+    </td>
+  </tr>
+</table>
