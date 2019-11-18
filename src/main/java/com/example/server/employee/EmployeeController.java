@@ -56,12 +56,6 @@ public class EmployeeController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Employee> EditEmployee(@PathVariable String id, @Valid @RequestBody Employee employee) {
-//		Employee emp = new Employee();
-//		emp.setE_no(employee.getE_no());
-//		emp.setName(employee.getName());
-//		emp.setAddress(employee.getAddress());
-//		emp.setStatus(employee.getStatus());
-
 		employee.setE_no(id);
 
 		employeeRepository.save(employee);

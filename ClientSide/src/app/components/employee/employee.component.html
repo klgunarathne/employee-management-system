@@ -18,9 +18,9 @@
     <td>{{ employee.e_no }}</td>
     <td>{{ employee.name }}</td>
     <td>{{ employee.address }}</td>
-    <td>{{ employee.status }}</td>
+    <td [ngClass]="{'text-success': employee.status ==='Active', 'text-danger': employee.status == 'Inactive'}">{{ employee.status }}</td>
     <td>
-      <i class="fa fa-trash m-2" (click)="onDelete(employee.e_no)" style="cursor: pointer;"></i>
+      <i class="fa fa-trash m-2" (click)="onDelete(employee.e_no, i)" style="cursor: pointer;"></i>
       <i class="fa fa-edit" (click)="onEdit(employee.e_no)" style="cursor: pointer;"></i>
     </td>
   </tr>

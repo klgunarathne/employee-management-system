@@ -8,6 +8,7 @@ import com.example.server.AllocateEmp.Allocate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.context.annotation.Primary;
 
 @Entity
 @Data
@@ -15,12 +16,13 @@ import lombok.Data;
 public class Employee {
 
 	@Id
+	@
 	private String e_no;
 	private String name;
 	private String address;
 	private String status;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "employee")
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<Allocate> Allocates;
 }

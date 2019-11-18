@@ -3,10 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/models/employee';
 import { EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import {map} from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ThrowStmt } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-form',
@@ -22,7 +23,13 @@ export class EmployeeFormComponent implements OnInit {
   isNew = true;
   title: string;
   employee: Employee;
-  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private route: ActivatedRoute) { }
+  constructor(
+    private fb: FormBuilder,
+    private employeeService: EmployeeService,
+    private route: ActivatedRoute,
+    private toastrService: ToastrService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.initForm();
@@ -56,11 +63,16 @@ export class EmployeeFormComponent implements OnInit {
         res => {
           this.newEmployee.emit(this.employeeForm.value);
           this.initForm();
+          this.toastrService.success('Employee Added', 'Success', { closeButton: true });
         }
       );
     } else {
-      this.employeeService.editEmployee(this.id, this.employeeForm.value);
-      console.log(this.employeeForm.value);
+      this.employeeService.editEmployee(this.id, this.employeeForm.value).subscribe(
+        res => {
+          this.toastrService.warning('Edit Employee', 'Success', { closeButton: true });
+          this.router.navigate(['/employee']);
+        }
+      );
 
     }
   }
