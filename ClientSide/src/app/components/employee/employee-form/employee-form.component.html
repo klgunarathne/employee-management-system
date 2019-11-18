@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">{{ title }}</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="employeeForm"  (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="e_no">Employee No. :</label>
+    <input class="form-control" id="e_no" type="text" formControlName="e_no">
+  </div>
+  <div class="form-group">
+    <label for="name">Name :</label>
+    <input class="form-control" id="name" type="text" formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="address">Address :</label>
+    <input class="form-control" id="address" type="text" formControlName="address">
+  </div>
+  <div class="form-group">
+    <label for="status">Status :</label>
+    <select formControlName="status" id="status" class="form-control">
+      <option value="{{ s }}" *ngFor="let s of status">{{ s }}</option>
+    </select>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" type="submit" class="btn btn-primary">Add Employee</button>
+  </div>
+</form>
+
+{{ id }}

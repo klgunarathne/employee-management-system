@@ -16,17 +16,19 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
+
 	public EmployeeController() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	@GetMapping()
 	public Iterable<Employee> GetEmployees() {
+
 		return employeeRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity GetEmployee(@PathVariable Long id) {
+	public ResponseEntity GetEmployee(@PathVariable String id) {
 
 		Optional<Employee> employee = employeeRepository.findById(id);
 		if(employee == null) {
@@ -42,7 +44,7 @@ public class EmployeeController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Long> DeleteEmployee(@PathVariable Long id) {
+	public ResponseEntity<String> DeleteEmployee(@PathVariable String id) {
 
 		Optional<Employee> employee = employeeRepository.findById(id);
 		if(!employee.isPresent()) {
@@ -50,6 +52,20 @@ public class EmployeeController {
 		}
 		employeeRepository.deleteById(id);
 		return ResponseEntity.ok(id);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Employee> EditEmployee(@PathVariable String id, @Valid @RequestBody Employee employee) {
+//		Employee emp = new Employee();
+//		emp.setE_no(employee.getE_no());
+//		emp.setName(employee.getName());
+//		emp.setAddress(employee.getAddress());
+//		emp.setStatus(employee.getStatus());
+
+		employee.setE_no(id);
+
+		employeeRepository.save(employee);
+		return ResponseEntity.ok(employee);
 	}
 
 }

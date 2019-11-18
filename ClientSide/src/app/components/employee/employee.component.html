@@ -1,21 +1,37 @@
 <div class="row float-right pb-4">
-  <button class="btn btn-link">+Add Employee</button>
+  <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal">+Add Employee</button>
 </div>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Id</th>
+      <th>#</th>
+      <th style="width: 15%;">Employee No.</th>
       <th>Name</th>
+      <th>Address</th>
+      <th>Status</th>
       <th style="width: 15%;"></th>
     </tr>
   </thead>
-  <tr *ngFor="let employee of employees">
-    <td>{{ employee.e_id }}</td>
+  <tr *ngFor="let employee of employees; let i=index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ employee.e_no }}</td>
     <td>{{ employee.name }}</td>
+    <td>{{ employee.address }}</td>
+    <td>{{ employee.status }}</td>
     <td>
-      <i class="fa fa-trash m-2" style="cursor: pointer;"></i>
-      <i class="fa fa-edit" style="cursor: pointer;"></i>
+      <i class="fa fa-trash m-2" (click)="onDelete(employee.e_no)" style="cursor: pointer;"></i>
+      <i class="fa fa-edit" (click)="onEdit(employee.e_no)" style="cursor: pointer;"></i>
     </td>
   </tr>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-employee-form (newEmployee)="onEmployeeAdd($event)"></app-employee-form>
+      </div>
+  </div>
+</div>

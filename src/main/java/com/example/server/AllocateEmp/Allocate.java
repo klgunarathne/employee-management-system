@@ -5,12 +5,7 @@ import com.example.server.employee.Employee;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Allocate {
@@ -24,51 +19,10 @@ public class Allocate {
 	private Date to_date;
 	
 	@ManyToOne()
-	@JoinColumn(name = "employee_id")
+	@JoinColumn(name = "employee_e_no")
 	private Employee employee;
 	
-	@ManyToOne
-	@JoinColumn(name = "department_id")
+	@OneToOne
+	@JoinColumn(name = "department_d_no")
 	private Department department;
-	
-	
-	
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public int getPercentage() {
-		return percentage;
-	}
-	public void setPercentage(int percentage) {
-		this.percentage = percentage;
-	}
-	public int getDuration() {
-		return duration;
-	}
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-	public Date getFrom_date() {
-		return from_date;
-	}
-	public void setFrom_date(Date from_date) {
-		this.from_date = from_date;
-	}
-	public Date getTo_date() {
-		return to_date;
-	}
-	public void setTo_date(Date to_date) {
-		this.to_date = to_date;
-	}
-	
-	
 }

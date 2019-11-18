@@ -7,13 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/department")
@@ -32,7 +26,7 @@ public class DepartmentController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Department>> GetDepartment(@RequestParam long id) {
+	public ResponseEntity<Optional<Department>> GetDepartment(@PathVariable String id) {
 		return ResponseEntity.ok(departmentRepository.findById(id));
 	}
 	
@@ -43,7 +37,7 @@ public class DepartmentController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Long> DeleteDepartment(@RequestParam long id) {
+	public ResponseEntity<String> DeleteDepartment(@RequestParam String id) {
 		departmentRepository.deleteById(id);
 		return ResponseEntity.ok(id);
 	}

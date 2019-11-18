@@ -1,7 +1,9 @@
 import { Allocate } from './allocate';
 
 export interface Employee {
-  e_id: number;
+  e_no: string;
   name: string;
+  address: string;
+  status: string;
   allocates: Allocate[];
 }
