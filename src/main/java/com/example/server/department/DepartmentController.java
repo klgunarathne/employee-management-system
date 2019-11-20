@@ -37,9 +37,16 @@ public class DepartmentController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> DeleteDepartment(@RequestParam String id) {
+	public ResponseEntity<String> DeleteDepartment(@PathVariable String id) {
 		departmentRepository.deleteById(id);
 		return ResponseEntity.ok(id);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Department> EditDepartment(@PathVariable String id, @RequestBody @Valid Department department) {
+		department.setD_no(id);
+		departmentRepository.save(department);
+		return ResponseEntity.ok(department);
 	}
 
 }

@@ -4,9 +4,6 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/models/employee';
 import { EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { ThrowStmt } from '@angular/compiler';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

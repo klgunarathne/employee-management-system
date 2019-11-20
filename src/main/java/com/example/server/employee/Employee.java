@@ -5,10 +5,8 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.example.server.AllocateEmp.Allocate;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.springframework.context.annotation.Primary;
 
 @Entity
 @Data
@@ -16,7 +14,6 @@ import org.springframework.context.annotation.Primary;
 public class Employee {
 
 	@Id
-	@
 	private String e_no;
 	private String name;
 	private String address;

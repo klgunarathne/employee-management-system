@@ -1,7 +1,7 @@
 import { Allocate } from './allocate';
 
 export interface Department {
-  d_id: number;
+  d_no: number;
   name: string;
   allocates: Allocate[];
 }

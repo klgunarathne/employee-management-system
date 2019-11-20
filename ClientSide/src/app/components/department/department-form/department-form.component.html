@@ -1,0 +1,13 @@
+<form  [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="form-group col-md-3">
+      <input placeholder="Department No" type="text" id="d_no" class="form-control"  formControlName="d_no">
+    </div>
+    <div class="form-group col-md-8">
+      <input placeholder="Department Name" type="text" id="name" class="form-control" formControlName="name">
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-success" type="submit">Add</button>
+    </div>
+  </div>
+</form>
