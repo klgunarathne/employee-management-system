@@ -8,6 +8,6 @@ export interface Allocate {
   from_date: any;
   to_date: any;
 
-  employee: Employee[];
-  department: Department[];
+  employee: Employee;
+  department: Department;
 }

@@ -15,7 +15,7 @@ export class DepartmentService {
   }
 
   deleteDepartment(id: string) {
-    return this.httpClient.delete('/api/department' + id, { responseType: 'text'});
+    return this.httpClient.delete('/api/department/' + id, { responseType: 'text'});
   }
 
   addDepartment(department: Department) {
@@ -23,12 +23,12 @@ export class DepartmentService {
   }
 
   getDepartment(id: string): Observable<Department> {
-    return this.httpClient.get<Department>('/api/department' + id);
+    return this.httpClient.get<Department>('/api/department/' + id);
   }
 
   editDepartment(id: string, department: Department) {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.httpClient.put('/api/department' + id, department, { headers });
+    return this.httpClient.put('/api/department/' + id, department, { headers });
   }
 }

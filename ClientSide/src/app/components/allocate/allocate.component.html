@@ -1,0 +1,67 @@
+<form [formGroup]="allocateForm" (ngSubmit)="onSubmit()">
+  <div>
+    <div class="row">
+      <div class="col-md-5">
+        <div formGroupName="employee">
+          <div class="form-group">
+            <label for="employee">Employee</label>
+            <select class="form-control" formControlName="e_no" (change)="onEmployeeChange(employee)" #employee>
+              <option>Select Employee</option>
+              <option *ngFor="let employee of employees" id="employee" [value]="employee.e_no">({{ employee.e_no }})
+                {{ employee.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="form_date">Form Date</label>
+              <input type="date" class="form-control" formControlName="from_date">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="to_date">To Date</label>
+              <input type="date" class="form-control" formControlName="to_date">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        chart
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div formGroupName="department">
+          <div class="form-group">
+            <label for="department">Department</label>
+            <select class="form-control" formControlName="d_no">
+              <option>Select Department</option>
+              <option *ngFor="let department of departments" id="department" [value]="department.d_no">
+                {{ department.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="from-group">
+          <label for="presentage">Presentage</label>
+          <input type="number" class="form-control" formControlName="percentage">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group float-right">
+          <button class="btn btn-success" type="submit">Allocate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

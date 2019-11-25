@@ -34,6 +34,7 @@ export class DepartmentFormComponent implements OnInit {
       () => {
         this.toastrService.success('Department Added', 'Department', { closeButton: true });
         this.department.emit(this.departmentForm.value);
+        this.departmentForm.reset();
       }
     );
   }

@@ -5,5 +5,4 @@ export interface Employee {
   name: string;
   address: string;
   status: string;
-  allocates: Allocate[];
 }

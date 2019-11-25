@@ -15,6 +15,10 @@ const routes: Routes = [
       {
         path: 'department',
         loadChildren: './components/department/department.module#DepartmentModule'
+      },
+      {
+        path: 'allocate',
+        loadChildren: './components/allocate/allocate.module#AllocateModule'
       }
     ]
   },
