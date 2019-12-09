@@ -1,9 +1,12 @@
 package com.example.server.employee;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,25 +19,28 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
+	ModelMapper modelMapper = new ModelMapper();
+
 
 	public EmployeeController() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@GetMapping()
-	public Iterable<Employee> GetEmployees() {
-
-		return employeeRepository.findAll();
+	@GetMapping
+	@ResponseBody
+	public List<EmployeeDTO> GetEmployees() {
+		List<Employee> employee = employeeRepository.findAll();
+		return employee.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity GetEmployee(@PathVariable String id) {
+	public ResponseEntity<Optional<Employee>> GetEmployee(@PathVariable String id) {
 
 		Optional<Employee> employee = employeeRepository.findById(id);
-		if(employee == null) {
+		if(!employeeRepository.findById(id).isPresent()) {
 			return new ResponseEntity("Employee not found", HttpStatus.NOT_FOUND);
 		}
-		return ResponseEntity.ok(employeeRepository.findById(id));
+		return ResponseEntity.ok(employee);
 	}
 	
 	@PostMapping
@@ -60,6 +66,11 @@ public class EmployeeController {
 
 		employeeRepository.save(employee);
 		return ResponseEntity.ok(employee);
+	}
+
+	private EmployeeDTO convertToDto(Employee employee) {
+		EmployeeDTO employeeDTO = modelMapper.map(employee, EmployeeDTO.class);
+		return employeeDTO;
 	}
 
 }
