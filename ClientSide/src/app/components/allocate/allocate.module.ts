@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AllocateRoutingModule } from './allocate-routing.module';
 import { AllocateComponent } from './allocate.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AllocateRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ]
 })
 export class AllocateModule { }

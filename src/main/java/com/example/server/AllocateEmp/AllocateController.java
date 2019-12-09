@@ -1,9 +1,12 @@
 package com.example.server.AllocateEmp;
 
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,5 +57,27 @@ public class AllocateController {
 		}
 		_repository.deleteById(id);
 		return  ResponseEntity.ok(id.toString());
+	}
+
+	@GetMapping("/employee/{ENo}")
+	public ResponseEntity<List<Allocates>> GetAllocatesFromENo(@PathVariable String ENo) {
+		LocalDate todayDate = LocalDate.now();
+		List<Allocates> allocates = _repository.GetAllocationsByEmployeeNo(ENo, todayDate);
+		if(allocates.isEmpty()) {
+			String msg = "";
+			return (new ResponseEntity("Employee not allocated", HttpStatus.NOT_FOUND));
+		}
+
+		List<AllocateDashboard> allocateDashboard = null;
+		AllocateDashboard data = new AllocateDashboard();
+
+		if(!allocates.isEmpty()) {
+			allocates.forEach(a -> {
+				data.setDepartment(a.getDepartment());
+				data.setPercentage((float) a.getPercentage());
+			});
+		}
+
+		return ResponseEntity.ok(allocates);
 	}
 }

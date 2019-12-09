@@ -31,4 +31,8 @@ export class AllocateService {
     headers.append('Content-Type', 'application/json');
     return this.httpClient.put('/api/allocate/' + id, allocate, { headers });
   }
+
+  getAllocationFromEmployeeNo(eNo: string) {
+    return this.httpClient.get('/api/allocate/employee/' + eNo);
+  }
 }

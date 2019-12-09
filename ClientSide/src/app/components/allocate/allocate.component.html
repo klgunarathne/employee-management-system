@@ -1,40 +1,41 @@
 <form [formGroup]="allocateForm" (ngSubmit)="onSubmit()">
-  <div>
-    <div class="row">
-      <div class="col-md-5">
-        <div formGroupName="employee">
+
+  <div class="row">
+    <div class="col-md-7">
+      <div class="row">
+        <div class="col">
+          <div formGroupName="employee">
+            <div class="form-group">
+              <label for="employee">Employee</label>
+              <select class="form-control" formControlName="e_no" (change)="onEmployeeChange(employee)" #employee>
+                <option>Select Employee</option>
+                <option *ngFor="let employee of employees" id="employee" [value]="employee.e_no">({{ employee.e_no }})
+                  {{ employee.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <div class="form-group">
-            <label for="employee">Employee</label>
-            <select class="form-control" formControlName="e_no" (change)="onEmployeeChange(employee)" #employee>
-              <option>Select Employee</option>
-              <option *ngFor="let employee of employees" id="employee" [value]="employee.e_no">({{ employee.e_no }})
-                {{ employee.name }}</option>
-            </select>
+            <label for="form_date">Form Date</label>
+            <input type="date" class="form-control" formControlName="from_date">
           </div>
         </div>
-      </div>
-      <div class="col-md-7">
-        <div class="row">
-          <div class="col">
-            <div class="form-group">
-              <label for="form_date">Form Date</label>
-              <input type="date" class="form-control" formControlName="from_date">
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <label for="to_date">To Date</label>
-              <input type="date" class="form-control" formControlName="to_date">
-            </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="to_date">To Date</label>
+            <input type="date" class="form-control" formControlName="to_date">
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        chart
-      </div>
+    <div class="col-md-5">
+      charts
     </div>
+  </div>
+  <div>
     <div class="row">
       <div class="col-md-6">
         <div formGroupName="department">
