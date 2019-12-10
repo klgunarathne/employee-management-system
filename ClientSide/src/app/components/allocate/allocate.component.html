@@ -32,7 +32,13 @@
       </div>
     </div>
     <div class="col-md-5">
-      charts
+        <div style="display: block">
+            <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
     </div>
   </div>
   <div>

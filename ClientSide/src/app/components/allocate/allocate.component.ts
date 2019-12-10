@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AllocateService } from 'src/app/services/allocate.service';
 import { ToastrService } from 'ngx-toastr';
 import { Allocate } from 'src/app/models/allocate';
+import { Label, MultiDataSet } from 'ng2-charts';
+import { ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-allocate',
@@ -18,6 +20,16 @@ export class AllocateComponent implements OnInit {
   employees: Employee[] = [];
   departments: Department[] = [];
   allocateForm: FormGroup;
+
+  // Doughnut
+  public doughnutChartLabels: Label[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+  public doughnutChartData: MultiDataSet = [
+    [350, 450, 100],
+    [50, 150, 120],
+    [250, 130, 70],
+  ];
+  public doughnutChartType: ChartType = 'doughnut';
+
   constructor(
     private departmentService: DepartmentService,
     private employeeService: EmployeeService,

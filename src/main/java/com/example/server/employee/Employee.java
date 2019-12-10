@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.example.server.AllocateEmp.Allocate;
+import com.example.server.AllocateEmp.Allocates;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -19,5 +19,5 @@ public class Employee {
 
 	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private List<Allocate> allocates;
+	private List<Allocates> allocates;
 }

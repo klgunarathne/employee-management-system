@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface AllocateRepository extends JpaRepository<Allocate, Long> {
+public interface AllocateRepository extends JpaRepository<Allocates, Long> {
 
     @Query(value = "SELECT * FROM Allocates a where a.e_no = ?1 and a.to_date >= ?2", nativeQuery = true)
     public List<Allocates> GetAllocationsByEmployeeNo(String e_no, LocalDate today);
