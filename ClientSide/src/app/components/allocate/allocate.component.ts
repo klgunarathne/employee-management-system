@@ -7,8 +7,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AllocateService } from 'src/app/services/allocate.service';
 import { ToastrService } from 'ngx-toastr';
 import { Allocate } from 'src/app/models/allocate';
-import { Label, MultiDataSet } from 'ng2-charts';
-import { ChartType } from 'chart.js';
+import { Label, MultiDataSet, SingleDataSet } from 'ng2-charts';
+import { ChartType, ChartPoint } from 'chart.js';
 
 @Component({
   selector: 'app-allocate',
@@ -20,14 +20,11 @@ export class AllocateComponent implements OnInit {
   employees: Employee[] = [];
   departments: Department[] = [];
   allocateForm: FormGroup;
+  allocates: Allocate[] = [];
 
   // Doughnut
-  public doughnutChartLabels: Label[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public doughnutChartData: MultiDataSet = [
-    [350, 450, 100],
-    [50, 150, 120],
-    [250, 130, 70],
-  ];
+  public doughnutChartLabels: string[] = [];
+  public doughnutChartData: number[] = [];
   public doughnutChartType: ChartType = 'doughnut';
 
   constructor(
@@ -36,7 +33,7 @@ export class AllocateComponent implements OnInit {
     private allocateService: AllocateService,
     private toastrService: ToastrService,
     private fb: FormBuilder
-    ) { }
+  ) { }
 
 
   ngOnInit() {
@@ -67,7 +64,7 @@ export class AllocateComponent implements OnInit {
         e_no: ['Select Employee', Validators.required]
       }),
       department: this.fb.group({
-        d_no:  ['Select Department', Validators.required]
+        d_no: ['Select Department', Validators.required]
       })
     });
   }
@@ -82,7 +79,38 @@ export class AllocateComponent implements OnInit {
   }
 
   onEmployeeChange(employee: any) {
-    console.log(employee.value);
+    this.allocateService.getAllocationFromEmployeeNo(employee.value).subscribe(
+      (res: Allocate[]) => {
+        this.allocates = res;
+        this.getChartData();
+      },
+      error => {
+        this.toastrService.warning('This employee not allocated to any department', 'Allocate', { closeButton: true });
+        this.getChartData();
+      }
+    );
 
+  }
+
+  getChartData() {
+    this.doughnutChartData = [];
+    this.doughnutChartLabels = [];
+    let totalPrecetage = 0;
+
+    if (this.allocates.length < 1) {
+      this.doughnutChartLabels.push('Not Allocated');
+      this.doughnutChartData.push(100);
+    } else {
+      this.allocates.forEach(a => {
+        this.doughnutChartLabels.push(a.department.name);
+        this.doughnutChartData.push(a.percentage);
+        totalPrecetage += a.percentage;
+      });
+
+      if (totalPrecetage < 100) {
+        this.doughnutChartLabels.push('Not Allocated');
+        this.doughnutChartData.push(100 - totalPrecetage);
+      }
+    }
   }
 }
