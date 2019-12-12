@@ -51,7 +51,6 @@ export class EmployeeItemComponent implements OnInit {
       this.doughnutChartData.push(100);
     } else {
       this.allocates.forEach(a => {
-        this.doughnutChartLabels.push(a.department.d_no.toString());
         this.doughnutChartData.push(a.percentage);
         totalPrecetage += a.percentage;
       });
