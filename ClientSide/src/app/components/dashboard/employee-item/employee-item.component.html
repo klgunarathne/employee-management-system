@@ -1,0 +1,21 @@
+<div class="col">
+  <div class="card" style="max-width: 500px;">
+    <div class="row no-gutters">
+      <div class="col-md-5">
+        <img src="assets/images/employees/user-img.png" class="card-img-top h-100 rounded" alt="...">
+      </div>
+      <div class="col-md-7">
+        <div class="card-body">
+          <h5 class="card-title">{{ employee.name }} ({{ employee.e_no }})</h5>
+        </div>
+        <div class="row">
+          <div style="display: block">
+            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutColors"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

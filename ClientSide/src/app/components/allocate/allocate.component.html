@@ -7,8 +7,8 @@
           <div formGroupName="employee">
             <div class="form-group">
               <label for="employee">Employee</label>
-              <select class="form-control" formControlName="e_no" (change)="onEmployeeChange(employee)" #employee>
-                <option>Select Employee</option>
+              <select class="form-control" formControlName="e_no" (change)="onEmployeeChange(employee)" #employee
+                required aria-placeholder="select Employee">
                 <option *ngFor="let employee of employees" id="employee" [value]="employee.e_no">({{ employee.e_no }})
                   {{ employee.name }}</option>
               </select>
@@ -32,13 +32,11 @@
       </div>
     </div>
     <div class="col-md-5">
-        <div style="display: block">
-            <canvas baseChart
-              [data]="doughnutChartData"
-              [labels]="doughnutChartLabels"
-              [chartType]="doughnutChartType">
-            </canvas>
-          </div>
+      <div style="display: block">
+        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutColors"
+          [chartType]="doughnutChartType">
+        </canvas>
+      </div>
     </div>
   </div>
   <div>
@@ -48,8 +46,8 @@
           <div class="form-group">
             <label for="department">Department</label>
             <select class="form-control" formControlName="d_no">
-              <option>Select Department</option>
-              <option *ngFor="let department of departments" id="department" [value]="department.d_no">
+              <option *ngFor="let department of departments" id="department" [value]="department.d_no" required
+                aria-placeholder="Select Department">
                 {{ department.name}}
               </option>
             </select>
@@ -59,14 +57,14 @@
       <div class="col-md-6">
         <div class="from-group">
           <label for="presentage">Presentage</label>
-          <input type="number" class="form-control" formControlName="percentage">
+          <input type="number" class="form-control" formControlName="percentage" required>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <div class="form-group float-right">
-          <button class="btn btn-success" type="submit">Allocate</button>
+          <button class="btn btn-success" type="submit" [disabled]="allocateForm.invalid">Allocate</button>
         </div>
       </div>
     </div>

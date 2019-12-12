@@ -11,13 +11,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { AboutComponent } from './components/about/about.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { EmployeeItemComponent } from './components/dashboard/employee-item/employee-item.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     SideBarComponent,
-    NavBarComponent
+    NavBarComponent,
+    AboutComponent,
+    DashboardComponent,
+    EmployeeItemComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,12 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

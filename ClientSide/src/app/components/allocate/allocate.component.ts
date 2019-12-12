@@ -3,12 +3,11 @@ import { Employee } from 'src/app/models/employee';
 import { Department } from 'src/app/models/department';
 import { DepartmentService } from 'src/app/services/department.service';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, MaxLengthValidator } from '@angular/forms';
 import { AllocateService } from 'src/app/services/allocate.service';
 import { ToastrService } from 'ngx-toastr';
 import { Allocate } from 'src/app/models/allocate';
-import { Label, MultiDataSet, SingleDataSet } from 'ng2-charts';
-import { ChartType, ChartPoint } from 'chart.js';
+import { ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-allocate',
@@ -26,6 +25,11 @@ export class AllocateComponent implements OnInit {
   public doughnutChartLabels: string[] = [];
   public doughnutChartData: number[] = [];
   public doughnutChartType: ChartType = 'doughnut';
+  public doughnutColors = [
+    {
+      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
+    },
+  ];
 
   constructor(
     private departmentService: DepartmentService,
@@ -56,15 +60,15 @@ export class AllocateComponent implements OnInit {
 
   initForm() {
     this.allocateForm = this.fb.group({
-      percentage: [0],
+      percentage: [0,[ Validators.required, Validators.max(100)]],
       duration: [0],
       from_date: ['', Validators.required],
       to_date: ['', Validators.required],
       employee: this.fb.group({
-        e_no: ['Select Employee', Validators.required]
+        e_no: [, Validators.required]
       }),
       department: this.fb.group({
-        d_no: ['Select Department', Validators.required]
+        d_no: [, Validators.required]
       })
     });
   }
@@ -79,6 +83,7 @@ export class AllocateComponent implements OnInit {
   }
 
   onEmployeeChange(employee: any) {
+    this.allocates = [];
     this.allocateService.getAllocationFromEmployeeNo(employee.value).subscribe(
       (res: Allocate[]) => {
         this.allocates = res;

@@ -1,8 +1,8 @@
 <!-- The sidebar -->
 <div class="sidebar">
-  <a href="#home">Home</a>
+  <a [routerLink]="['/']" routerLinkActive="active">Dashboard</a>
   <a [routerLink]="['/employee']" routerLinkActive="active" >Employees</a>
   <a [routerLink]="['/department']" routerLinkActive="active" >Departments</a>
   <a [routerLink]="['/allocate']" routerLinkActive="active" >Allocations</a>
-  <a href="#about">About</a>
+  <a [routerLink]="['/about']" routerLinkActive="active" >About</a>
 </div>
